@@ -44,7 +44,7 @@ app.get("/articles", function(req, res) {
     console.log(foundArticles);
 
     //Send back to the client
-    If(!err) {
+    if (!err) {
       res.send(foundArticles);
     }
     //Send back the error
