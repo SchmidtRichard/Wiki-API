@@ -54,6 +54,7 @@ app.get("/articles", function(req, res) {
   });
 });
 
+
 //Set up the server to listen to port 3000
 app.listen(3000, function() {
   console.log("Server started on port 3000");
