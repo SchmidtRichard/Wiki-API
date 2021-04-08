@@ -37,13 +37,22 @@ const articleSchema = {
 //Create the Article model using mongoose based on the articleSchema
 const Article = mongoose.model("Article", articleSchema);
 
+//Create the GET Route that fetches all the articles from the DB
+app.get("/articles", function(req, res) {
+  //Query the DB and find all the articles inside the Articles collections
+  Article.find(function(err, foundArticles) {
+    console.log(foundArticles);
 
-
-
-
-
-
-
+    //Send back to the client
+    If(!err) {
+      res.send(foundArticles);
+    }
+    //Send back the error
+    else {
+      res.send(err);
+    }
+  });
+});
 
 //Set up the server to listen to port 3000
 app.listen(3000, function() {
