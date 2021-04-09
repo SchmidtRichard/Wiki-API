@@ -69,7 +69,7 @@ app.get(route, function(req, res){
 });
 ```
 
-#### READ MongoDB
+#### READ From mongoDB
 
 ```js
 //Query the DB and find all the "articles" inside the "Articles" collections
@@ -77,3 +77,106 @@ app.get(route, function(req, res){
 	//Use the found results docs
 });
 ```
+
+#### GET Route Code Example
+
+```js
+//Create the GET Route that fetches all the articles from the DB
+app.get("/articles", function(req, res) {
+  //Query the DB and find all the articles inside the Articles collections
+  Article.find(function(err, foundArticles) {
+    console.log(foundArticles);
+
+    //Send back to the client
+    if (!err) {
+      res.send(foundArticles);
+    }
+    //Send back the error
+    else {
+      res.send(err);
+    }
+  });
+});
+```
+
+#### POST Route
+
+```js
+//Create the POST Route that will create the new article
+//Use express to address POST requests on the server
+app.post(route, function(req, res){
+
+});
+```
+
+#### CREATE Data and Save Into mongoDB
+
+Save the Data Created from the POST Request Into the mongoDB
+
+```js
+//Create a new constant that will store a new article
+const <constantName> = new <ModelName>({
+
+	//The article will have two fields: title and content
+	<fieldName> : <fieldData>,
+	<fieldName> : <fieldData>,
+});
+
+//Save the new object into the mongoDB
+<constantName>.save();
+```
+
+#### POST Route Code Example
+
+```js
+//Create the POST Route that will create the new article
+//Use express to address POST requests on the server
+app.post("/articles", function(req, res) {
+  //Once the POST request come through from the client we need to tap into the req.body in order to grab the data that was sent through
+  console.log(req.body.title);
+  console.log(req.body.content);
+
+  //Create a new constant newArticle that will store a new article
+  //Use the Article model
+  const newArticle = new Article({
+
+    //title will store the data we receive from the POST request through the req.body.title
+    //content will store the data we receive from the POST request through the req.body.content
+    title: req.body.title,
+    content: req.body.content
+  });
+  //Save the new object into the mongoDB
+  newArticle.save(function(err) {
+    if (!err) {
+      res.send("Successfully added a new article!");
+    } else {
+      res.send(err);
+    }
+  });
+});
+```
+
+**_Using Postman to Handle the POST Request_**</br>
+1 - Open a new tab inside Postman</br>
+2- Choose **POST** from the dropdown menu</br>
+3 - Type in `localhost:3000/articles`</br>
+
+**_Then to send data along with the POST request_**</br>
+1 - Go to the **Body** tab and change the encoding to `x-www-form-urlencoded`, which is what our `bodyParser` is designed to handle</br>
+2 - Then add the variables we defined: `title` and `content` as the **KEY** inside Postman</br>
+
+#### Example of a HTML Form POST Request
+
+```html
+<form method="post" action="/">
+	<input type="text" name="title">
+	<input type="text" name="content">
+	<button type="submit">Send</button>
+</form>
+```
+
+## Running the Server and MongoDB in the Hyper Terminal
+
+1 - Open the project location inside Hyper and type in `mongod` and press `Enter`</br>
+2 - In a new tab inside Hyper type `mongo` and press `Enter`</br>
+3 - In a new tab inside Hyper type `nodemon app.js` and press `Enter`</br>

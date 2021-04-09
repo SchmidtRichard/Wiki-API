@@ -55,7 +55,7 @@ app.get("/articles", function(req, res) {
 });
 
 //Create the POST Route that will create the new article
-//Use express to addres post requests on the server
+//Use express to address POST requests on the server
 app.post("/articles", function(req, res) {
   //Once the POST request come through from the client we need to tap into the req.body in order to grab the data that was sent through
   console.log(req.body.title);
