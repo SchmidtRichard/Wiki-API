@@ -54,6 +54,31 @@ app.get("/articles", function(req, res) {
   });
 });
 
+//Create the POST Route that will create the new article
+//Use express to addres post requests on the server
+app.post("/articles", function(req, res) {
+  //Once the POST request come through from the client we need to tap into the req.body in order to grab the data that was sent through
+  console.log(req.body.title);
+  console.log(req.body.content);
+
+  //Create a new constant newArticle that will store a new article
+  //Use the Article model
+  const newArticle = new Article({
+
+    //title will store the data we receive from the POST request through the req.body.title
+    //content will store the data we receive from the POST request through the req.body.content
+    title: req.body.title,
+    content: req.body.content
+  });
+  //Save the new object into the mongoDB
+  newArticle.save(function(err) {
+    if (!err) {
+      res.send("Successfully added a new article!");
+    } else {
+      res.send(err);
+    }
+  });
+});
 
 //Set up the server to listen to port 3000
 app.listen(3000, function() {

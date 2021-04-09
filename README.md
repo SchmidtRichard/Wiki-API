@@ -1,6 +1,6 @@
 # Wiki-API
-## Boilerplate - Steps to Create a New Server That Uses MongoDB
 
+## Boilerplate - Steps to Create a New Server That Uses MongoDB
 
 ```javascript
 //jshint esversion:6
@@ -50,23 +50,27 @@ app.listen(3000, function() {
 
 ## RESTful
 
-| HTTP Verbs | /articles | /articles/oasis |
-| :----------: | :---------: | :--------------------: |
-| GET | Feches **all** the articles | Feches **the** article on Oasis |
-| POST | Creates **one** new article | - |
-| PUT | - | Updates **the** articles on Oasis |
-| PATCH | - | Updates **the** article on Oasis |
-| DELETE | Deletes **all** the articles | Deletes **the** article on Oasis |
+| HTTP Verbs |           /articles          |          /articles/oasis          |
+| :--------: | :--------------------------: | :-------------------------------: |
+|     GET    |  Feches **all** the articles |  Feches **the** article on Oasis  |
+|    POST    |  Creates **one** new article |                 -                 |
+|     PUT    |               -              | Updates **the** articles on Oasis |
+|    PATCH   |               -              |  Updates **the** article on Oasis |
+|   DELETE   | Deletes **all** the articles |  Deletes **the** article on Oasis |
 
 ### Create the API Routes
+
 #### GET Route
 
 ```javascript
+//Create the GET Route that fetches all the articles from the DB
 app.get(route, function(req, res){
 
 });
 ```
+
 #### READ MongoDB
+
 ```js
 //Query the DB and find all the "articles" inside the "Articles" collections
 <ModelName>.find({conditions}, function(err, results){
