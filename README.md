@@ -164,6 +164,10 @@ app.post("/articles", function(req, res) {
 **_Then to send data along with the POST request_**</br>
 1 - Go to the **Body** tab and change the encoding to `x-www-form-urlencoded`, which is what our `bodyParser` is designed to handle</br>
 2 - Then add the variables we defined: `title` and `content` as the **KEY** inside Postman</br>
+3 - Inside a title and content to the **VALUE**</br>
+4 - Press **SEND** to send the **POST** request</br>
+5 - Jump back to the **Hyper** terminal and see the data being printed</br>
+6 - Jump back **Robo 3T** and select `wikiDB/Collections/**articles**` then **CLICK** over it and select `View Documents`</br>
 
 #### Example of a HTML Form POST Request
 
