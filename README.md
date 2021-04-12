@@ -193,7 +193,7 @@ app.delete("/articles", function(req, res) {
 });
 ```
 
-#### app.route()
+#### [app.route()](https://expressjs.com/en/guide/routing.html)
 
 You can create chainable route handlers for a route path by using `app.route()`. Because the path is specified at a single location, creating modular routes is helpful, as is reducing redundancy and typos.
 
@@ -235,6 +235,55 @@ app.route('/book')
  })
 ```
 
+#### HTTP GET a Specific Article Using Chained Route Handlers
+
+```js
+//Create the GET Route that fetches all a specific article from the DB
+app.route("route")
+
+.get(function(req, res){
+
+});
+```
+
+#### READ from mongoDB
+
+```js
+//Query the DB and find a specific article inside the "Articles" collections
+//findOne Method
+<ModelName>.findOne({conditions}, function(err, result){
+	//Use the found result
+});
+```
+
+#### GET Route Code Example Using Chained Route Handlers
+
+```js
+app.route("/articles/:articleTitle")
+
+  //Express Parameters -
+  //req.params.articleTitle = "Oasis"
+
+  .get(function(req, res) {
+    /*
+    Look through our collection of Articles, find one document where the title is equal to the one inside
+    the request parameters which is the articleTitle (req.params.articleTitle)
+    */
+    Article.findOne({
+      title: req.params.articleTitle
+    }, function(err, foundArticle) {
+
+      //Send the article back to the client if it has been found
+      if (foundArticle) {
+        res.send(foundArticle);
+        //If the article has not been found then display the message below
+      } else {
+        res.send("No articles matching the title provided! Please try again!");
+      }
+    });
+  });
+```
+
 **_Using Postman to Handle the POST Request_**</br>
 1 - Open a new tab inside Postman</br>
 2- Choose **POST** from the dropdown menu</br>
@@ -264,7 +313,7 @@ app.route('/book')
 2 - In a new tab inside Hyper type `mongo` and press `Enter`</br>
 3 - In a new tab inside Hyper type `nodemon app.js` and press `Enter`</br>
 
-## mongo Shell Quick Reference
+## [mongo] Shell Quick Reference(<https://docs.mongodb.com/manual/reference/mongo-shell/>)
 
 |  Option | Description                                                                                                                     |
 | :-----: | :------------------------------------------------------------------------------------------------------------------------------ |
@@ -280,7 +329,7 @@ app.route('/book')
 |         db.help()         | Show help for database methods.                                                                                                                                                                                   |
 |   db.<collection>.help()  | Show help on collection methods. The &lt;**collection**> can be the name of an existing collection or a non-existing collection.                                                                                  |
 |          show dbs         | Print a list of all databases on the server. The operation corresponds to the listDatabases command. If the deployment runs with access control, the operation returns different values based on user privileges. |
-|          use <db>         | Switch current database to &lt;**db**>. The mongo shell variable **db** is set to the current database.                                                                                                           |
+|       use &lt; db >       | Switch current database to &lt;**db**>. The mongo shell variable **db** is set to the current database.                                                                                                           |
 |      show collections     | Print a list of all collections for current database.                                                                                                                                                             |
 |         show users        | Print a list of users for current database.                                                                                                                                                                       |
 |         show roles        | Print a list of all roles, both user-defined and built-in, for the current database.                                                                                                                              |

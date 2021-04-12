@@ -37,6 +37,8 @@ const articleSchema = {
 //Create the Article model using mongoose based on the articleSchema
 const Article = mongoose.model("Article", articleSchema);
 
+/****** REQUEST TARGETTING ALL ARTICLES ******/
+
 //Chained Route Handlers Using Express - app.route() method
 //You can create chainable route handlers for a route path by using app.route(). Because the path is specified at a single location, creating modular routes is helpful, as is reducing redundancy and typos.
 app.route("/articles")
@@ -149,6 +151,29 @@ app.route("/articles")
 //     }
 //   });
 // });
+
+/****** REQUEST TARGETTING A SPECIFIC ARTICLE ******/
+
+app.route("/articles/:articleTitle")
+
+  //Express Parameters -
+  //req.params.articleTitle = "Oasis"
+
+  .get(function(req, res) {
+    //Look through our collection of Articles, find one document where the title is equal to the one inside the request parameters which is the articleTitle (req.params.articleTitle)
+    Article.findOne({
+      title: req.params.articleTitle
+    }, function(err, foundArticle) {
+
+      //Send the article back to the client if it has been found
+      if (foundArticle) {
+        res.send(foundArticle);
+        //If the article has not been found then display the message below
+      } else {
+        res.send("No articles matching the title provided! Please try again!");
+      }
+    });
+  });
 
 //Set up the server to listen to port 3000
 app.listen(3000, function() {
