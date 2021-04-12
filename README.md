@@ -193,6 +193,48 @@ app.delete("/articles", function(req, res) {
 });
 ```
 
+#### app.route()
+
+You can create chainable route handlers for a route path by using `app.route()`. Because the path is specified at a single location, creating modular routes is helpful, as is reducing redundancy and typos.
+
+Here is an example of chained route handlers that are defined by using `app.route()`.
+
+```js
+app.route('/book')
+  .get(function (req, res) {
+    res.send('Get a random book')
+  })
+  .post(function (req, res) {
+    res.send('Add a book')
+  })
+  .put(function (req, res) {
+    res.send('Update the book')
+  })
+```
+
+#### New Code Using Chained Route Handlers That Replaces the Previous Ones
+
+```js
+ //Chained Route Handlers Using Express - app.route() method
+ app.route("/articles")
+ //Create the GET Route that fetches all the articles from the DB
+ .get(function(req, res) {
+   //Query the DB and find all the articles inside the Articles collections
+   Article.find(function(err, foundArticles) {
+     console.log(foundArticles);
+
+     //Send back to the client
+     if (!err) {
+       res.send(foundArticles);
+     }
+     //Send back the error
+     else {
+       res.send(err);
+     }
+   });
+ })
+```
+
 **_Using Postman to Handle the POST Request_**</br>
 1 - Open a new tab inside Postman</br>
 2- Choose **POST** from the dropdown menu</br>
@@ -221,3 +263,27 @@ app.delete("/articles", function(req, res) {
 1 - Open the project location inside Hyper and type in `mongod` and press `Enter`</br>
 2 - In a new tab inside Hyper type `mongo` and press `Enter`</br>
 3 - In a new tab inside Hyper type `nodemon app.js` and press `Enter`</br>
+
+## mongo Shell Quick Reference
+
+|  Option | Description                                                                                                                     |
+| :-----: | :------------------------------------------------------------------------------------------------------------------------------ |
+|  --help | Show command line options                                                                                                       |
+|  --nodb | Start mongo shell without connecting to a database.                                                                             |
+| --shell | Used in conjunction with a JavaScript file (i.e. `<file.js>`) to continue in the mongo shell after running the JavaScript file. |
+
+## mongo Command Helpers
+
+| Help Methods and Commands | Descritpion                                                                                                                                                                                                       |
+| :-----------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|            help           | Show help.                                                                                                                                                                                                        |
+|         db.help()         | Show help for database methods.                                                                                                                                                                                   |
+|   db.<collection>.help()  | Show help on collection methods. The &lt;**collection**> can be the name of an existing collection or a non-existing collection.                                                                                  |
+|          show dbs         | Print a list of all databases on the server. The operation corresponds to the listDatabases command. If the deployment runs with access control, the operation returns different values based on user privileges. |
+|          use <db>         | Switch current database to &lt;**db**>. The mongo shell variable **db** is set to the current database.                                                                                                           |
+|      show collections     | Print a list of all collections for current database.                                                                                                                                                             |
+|         show users        | Print a list of users for current database.                                                                                                                                                                       |
+|         show roles        | Print a list of all roles, both user-defined and built-in, for the current database.                                                                                                                              |
+|        show profile       | Print the five most recent operations that took 1 millisecond or more.                                                                                                                                            |
+|       show databases      | Print a list of all available databases. The operation corresponds to the listDatabases command. If the deployment runs with access control, the operation returns different values based on user privileges.     |
+|           load()          | Execute a JavaScript file.                                                                                                                                                                                        |
