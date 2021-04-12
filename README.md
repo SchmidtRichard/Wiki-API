@@ -52,7 +52,7 @@ app.listen(3000, function() {
 
 | HTTP Verbs |           /articles          |          /articles/oasis          |
 | :--------: | :--------------------------: | :-------------------------------: |
-|     GET    |  Feches **all** the articles |  Feches **the** article on Oasis  |
+|     GET    | Fetches **all** the articles |  Fetches **the** article on Oasis |
 |    POST    |  Creates **one** new article |                 -                 |
 |     PUT    |               -              | Updates **the** articles on Oasis |
 |    PATCH   |               -              |  Updates **the** article on Oasis |
@@ -60,7 +60,7 @@ app.listen(3000, function() {
 
 ### Create the API Routes
 
-#### GET Route
+#### HTTP GET Request/GET Route
 
 ```javascript
 //Create the GET Route that fetches all the articles from the DB
@@ -99,7 +99,7 @@ app.get("/articles", function(req, res) {
 });
 ```
 
-#### POST Route
+#### HTTP POST Request/POST Route
 
 ```js
 //Create the POST Route that will create the new article
@@ -133,7 +133,7 @@ const <constantName> = new <ModelName>({
 //Use express to address POST requests on the server
 app.post("/articles", function(req, res) {
   /*
-  Once the POST request come through from the client we need to 
+  Once the POST request come through from the client we need to
   tap into the req.body in order to grab the data that was sent through
   */
   console.log(req.body.title);
@@ -159,6 +159,40 @@ app.post("/articles", function(req, res) {
 });
 ```
 
+#### HTTP DELETE Request/DELETE Route
+
+```js
+//Create the DELETE Route that will delete all the articles inside articles collection using mongoose
+app.delete(route, function(req, res){
+
+});
+```
+
+#### DELETE Data From mongoDB Using deleteMany
+
+```js
+Mongoose Delete
+<modelName>.deleteMany({conditions}, function(err){
+
+});
+```
+
+#### DELETE Route Code Example
+
+```js
+//Create the DELETE Route that will delete all the articles inside articles collection using mongoose
+app.delete("/articles", function(req, res) {
+  //How the server will respond when the user makes the delete request to the /articles route
+  Article.deleteMany(function(err) {
+    if (!err) {
+      res.send("Successfull deleted all articles from the collection!");
+    } else {
+      res.send(err);
+    }
+  });
+});
+```
+
 **_Using Postman to Handle the POST Request_**</br>
 1 - Open a new tab inside Postman</br>
 2- Choose **POST** from the dropdown menu</br>
@@ -166,8 +200,8 @@ app.post("/articles", function(req, res) {
 
 **_Then to send data along with the POST request_**</br>
 1 - Go to the **Body** tab and change the encoding to `x-www-form-urlencoded`, which is what our `bodyParser` is designed to handle</br>
-2 - Then add the variables we defined: `title` and `content` as the **KEY** inside Postman</br>
-3 - Inside a title and content to the **VALUE**</br>
+2 - Then add the variables we defined in the code: `title` and `content` as the **KEY** inside Postman</br>
+3 - Inside title and content add the relevant data to the **VALUE** field</br>
 4 - Press **SEND** to send the **POST** request</br>
 5 - Jump back to the **Hyper** terminal and see the data being printed</br>
 6 - Jump back **Robo 3T** and select `wikiDB/Collections/**articles**` then **CLICK** over it and select `View Documents`</br>

@@ -80,6 +80,18 @@ app.post("/articles", function(req, res) {
   });
 });
 
+//Create the DELETE Route that will delete all the articles inside articles collection using mongoose
+app.delete("/articles", function(req, res) {
+  //How the server will respond when the user makes the delete request to the /articles route
+  Article.deleteMany(function(err) {
+    if (!err) {
+      res.send("Successfull deleted all articles from the collection!");
+    } else {
+      res.send(err);
+    }
+  });
+});
+
 //Set up the server to listen to port 3000
 app.listen(3000, function() {
   console.log("Server started on port 3000");
