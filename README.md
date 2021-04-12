@@ -235,6 +235,24 @@ app.route('/book')
  })
 ```
 
+#### [Route Parameters](https://expressjs.com/en/guide/routing.html)
+
+Route parameters are named URL segments that are used to capture the values specified at their position in the URL. The captured values are populated in the req.params object, with the name of the route parameter specified in the path as their respective keys.
+
+    Route path: /users/:userId/books/:bookId
+    Request URL: http://localhost:3000/users/34/books/8989
+    req.params: { "userId": "34", "bookId": "8989" }
+
+To define routes with route parameters, simply specify the route parameters in the path of the route as shown below.
+
+```js
+app.get('/users/:userId/books/:bookId', function (req, res) {
+  res.send(req.params)
+})
+```
+
+> :warning: The name of route parameters must be made up of “word characters” ([A-Za-z0-9_]).
+
 #### HTTP GET a Specific Article Using Chained Route Handlers
 
 ```js
@@ -266,7 +284,8 @@ app.route("/articles/:articleTitle")
 
   .get(function(req, res) {
     /*
-    Look through our collection of Articles, find one document where the title is equal to the one inside
+    Look through our collection of Articles, find one document
+    where the title is equal to the one inside
     the request parameters which is the articleTitle (req.params.articleTitle)
     */
     Article.findOne({
@@ -313,7 +332,7 @@ app.route("/articles/:articleTitle")
 2 - In a new tab inside Hyper type `mongo` and press `Enter`</br>
 3 - In a new tab inside Hyper type `nodemon app.js` and press `Enter`</br>
 
-## [mongo] Shell Quick Reference(<https://docs.mongodb.com/manual/reference/mongo-shell/>)
+## mongo Shell Quick [Reference](https://docs.mongodb.com/manual/reference/mongo-shell/)
 
 |  Option | Description                                                                                                                     |
 | :-----: | :------------------------------------------------------------------------------------------------------------------------------ |
@@ -323,16 +342,16 @@ app.route("/articles/:articleTitle")
 
 ## mongo Command Helpers
 
-| Help Methods and Commands | Descritpion                                                                                                                                                                                                       |
-| :-----------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|            help           | Show help.                                                                                                                                                                                                        |
-|         db.help()         | Show help for database methods.                                                                                                                                                                                   |
-|   db.<collection>.help()  | Show help on collection methods. The &lt;**collection**> can be the name of an existing collection or a non-existing collection.                                                                                  |
-|          show dbs         | Print a list of all databases on the server. The operation corresponds to the listDatabases command. If the deployment runs with access control, the operation returns different values based on user privileges. |
-|       use &lt; db >       | Switch current database to &lt;**db**>. The mongo shell variable **db** is set to the current database.                                                                                                           |
-|      show collections     | Print a list of all collections for current database.                                                                                                                                                             |
-|         show users        | Print a list of users for current database.                                                                                                                                                                       |
-|         show roles        | Print a list of all roles, both user-defined and built-in, for the current database.                                                                                                                              |
-|        show profile       | Print the five most recent operations that took 1 millisecond or more.                                                                                                                                            |
-|       show databases      | Print a list of all available databases. The operation corresponds to the listDatabases command. If the deployment runs with access control, the operation returns different values based on user privileges.     |
-|           load()          | Execute a JavaScript file.                                                                                                                                                                                        |
+|  Help Methods and Commands  | Descritpion                                                                                                                                                                                                       |
+| :-------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|             help            | Show help.                                                                                                                                                                                                        |
+|          db.help()          | Show help for database methods.                                                                                                                                                                                   |
+| db.&lt; collection >.help() | Show help on collection methods. The &lt;**collection**> can be the name of an existing collection or a non-existing collection.                                                                                  |
+|           show dbs          | Print a list of all databases on the server. The operation corresponds to the listDatabases command. If the deployment runs with access control, the operation returns different values based on user privileges. |
+|        use &lt; db >        | Switch current database to &lt;**db**>. The mongo shell variable **db** is set to the current database.                                                                                                           |
+|       show collections      | Print a list of all collections for current database.                                                                                                                                                             |
+|          show users         | Print a list of users for current database.                                                                                                                                                                       |
+|          show roles         | Print a list of all roles, both user-defined and built-in, for the current database.                                                                                                                              |
+|         show profile        | Print the five most recent operations that took 1 millisecond or more.                                                                                                                                            |
+|        show databases       | Print a list of all available databases. The operation corresponds to the listDatabases command. If the deployment runs with access control, the operation returns different values based on user privileges.     |
+|            load()           | Execute a JavaScript file.                                                                                                                                                                                        |
