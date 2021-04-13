@@ -1,5 +1,3 @@
-# Wiki-API
-
 ## Boilerplate - Steps to Create a New Server That Uses MongoDB
 
 ```javascript
@@ -345,6 +343,55 @@ app.put(route, function(req, res){
         res.send("Successfully updated article using PUT Request!");
       }
     });
+  });
+```
+
+#### HTTP PATCH Request/PATCH Route
+
+```javascript
+//Create the PATCH Route that updates the specific field of an article
+app.patch(route, function(req, res){
+
+});
+```
+
+#### UPDATE mongoDB
+
+```javascript
+//Work with mongoDB to replace a specific field with whatever is sent over by the client
+<ModelName>.update({conditions}, {$set: updates}, function(err, results){
+
+});
+```
+
+#### PATCH Route Code Example Using Chained Route Handlers
+
+```javascript
+  /*
+  Create the PATCH request that will update a particular element (field)
+  in the Article collection without overwritting everything
+  Use mongoose's UPDATE method
+  */
+  .patch(function(req, res) {
+    Article.update({
+        title: req.params.articleTitle
+      },
+      /*
+      What we want to update, use the $set operator to replace the value of a field with the specified value
+      The req.body inside the $set operator will take what the users passes through and
+      bodyParser will reparse the request and pickup the field(s) the user have provided,
+      hence updating mongoDB for only the field(s) that have a new value(s)
+      */
+      {
+        $set: req.body
+      },
+      function(err) {
+        if (!err) {
+          res.send("Successfully updated the article using the PATCH Request!");
+        } else {
+          res.send(err);
+        }
+      });
   });
 ```
 

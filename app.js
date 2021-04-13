@@ -196,13 +196,36 @@ app.route("/articles/:articleTitle")
         res.send("Successfully updated article using PUT Request!");
       }
     });
+  })
+
+
+
+  /*
+  Create the PATCH request that will update a particular element (field)
+  in the Article collection without overwritting everything
+  Use mongoose's UPDATE method
+  */
+  .patch(function(req, res) {
+    Article.update({
+        title: req.params.articleTitle
+      },
+      /*
+      What we want to update, use the $set operator to replace the value of a field with the specified value
+      The req.body inside the $set operator will take what the users passes through and
+      bodyParser will reparse the request and pickup the field(s) the user have provided,
+      hence updating mongoDB for only the field(s) that have a new value(s)
+      */
+      {
+        $set: req.body
+      },
+      function(err) {
+        if (!err) {
+          res.send("Successfully updated the article using the PATCH Request!");
+        } else {
+          res.send(err);
+        }
+      });
   });
-
-
-
-
-
-
 
 
 
