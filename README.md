@@ -219,22 +219,60 @@ app.route('/book')
 ```javascript
  //Chained Route Handlers Using Express - app.route() method
  app.route("/articles")
- //Create the GET Route that fetches all the articles from the DB
- .get(function(req, res) {
-   //Query the DB and find all the articles inside the Articles collections
-   Article.find(function(err, foundArticles) {
-     console.log(foundArticles);
+   //Create the GET Route that fetches all the articles from the DB
+   .get(function(req, res) {
+     //Query the DB and find all the articles inside the Articles collections
+     Article.find(function(err, foundArticles) {
+       console.log(foundArticles);
 
-     //Send back to the client
-     if (!err) {
-       res.send(foundArticles);
-     }
-     //Send back the error
-     else {
-       res.send(err);
-     }
+       //Send back to the client
+       if (!err) {
+         res.send(foundArticles);
+       }
+       //Send back the error
+       else {
+         res.send(err);
+       }
+     });
+   })
+
+   //Create the POST Route that will create the new article
+   //Use express to address POST requests on the server
+   .post(function(req, res) {
+     //Once the POST request come through from the client we need to tap into the req.body in order to grab the data that was sent through
+     console.log(req.body.title);
+     console.log(req.body.content);
+
+     //Create a new constant newArticle that will store a new article
+     //Use the Article model
+     const newArticle = new Article({
+
+       //title will store the data we receive from the POST request through the req.body.title
+       //content will store the data we receive from the POST request through the req.body.content
+       title: req.body.title,
+       content: req.body.content
+     });
+     //Save the new object into the mongoDB
+     newArticle.save(function(err) {
+       if (!err) {
+         res.send("Successfully added a new article!");
+       } else {
+         res.send(err);
+       }
+     });
+   })
+
+   //Create the DELETE Route that will delete all the articles inside articles collection using mongoose
+   .delete(function(req, res) {
+     //How the server will respond when the user makes the delete request to the /articles route
+     Article.deleteMany(function(err) {
+       if (!err) {
+         res.send("Successfull deleted all articles from the collection!");
+       } else {
+         res.send(err);
+       }
+     });
    });
- })
 ```
 
 ### [Route Parameters](https://expressjs.com/en/guide/routing.html)
@@ -426,7 +464,7 @@ app.delete(route, function(req, res){
       title: req.params.articleTitle
     }, function(err) {
       if (!err) {
-        res.send("Successfully deleted the corresponding article using the deleteOne method from mongoose!");
+        res.send("Successfully deleted the corresponding article using mongoose's deleteOne method!");
       } else {
         res.send(err);
       }
