@@ -1,3 +1,5 @@
+# Build Your Own RESTful API From Scratch
+
 ## Boilerplate - Steps to Create a New Server That Uses MongoDB
 
 ```javascript
@@ -377,7 +379,7 @@ app.patch(route, function(req, res){
         title: req.params.articleTitle
       },
       /*
-      What we want to update, use the $set operator to replace the value of a field with the specified value
+      Use the $set operator to replace the value of a field with the specified value we want to update
       The req.body inside the $set operator will take what the users passes through and
       bodyParser will reparse the request and pickup the field(s) the user have provided,
       hence updating mongoDB for only the field(s) that have a new value(s)
@@ -392,6 +394,41 @@ app.patch(route, function(req, res){
           res.send(err);
         }
       });
+  });
+```
+
+#### HTTP DELETE Request/DELETE Route
+
+```javascript
+//Create the DELETE request that will delete an entry from mongoDB (title and content)
+app.delete(route, function(req, res){
+
+});
+```
+
+#### DELETE mongoDB
+
+```javascript
+//Create the DELETE request that will delete an entry from mongoDB (title and content)
+<ModelName>.deleteOne({conditions}, function(err){
+
+});
+```
+
+#### DELETE Route Code Example Using Chained Route Handlers
+
+```javascript
+  //Create the DELETE request that will delete an entry from mongoDB (title and content)
+  .delete(function(req, res) {
+    Article.deleteOne({
+      title: req.params.articleTitle
+    }, function(err) {
+      if (!err) {
+        res.send("Successfully deleted the corresponding article using the deleteOne method from mongoose!");
+      } else {
+        res.send(err);
+      }
+    });
   });
 ```
 

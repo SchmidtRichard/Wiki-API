@@ -198,8 +198,6 @@ app.route("/articles/:articleTitle")
     });
   })
 
-
-
   /*
   Create the PATCH request that will update a particular element (field)
   in the Article collection without overwritting everything
@@ -225,9 +223,20 @@ app.route("/articles/:articleTitle")
           res.send(err);
         }
       });
+  })
+
+  //Create the DELETE request that will delete an entry from mongoDB (title and content)
+  .delete(function(req, res) {
+    Article.deleteOne({
+      title: req.params.articleTitle
+    }, function(err) {
+      if (!err) {
+        res.send("Successfully deleted the corresponding article using the deleteOne method from mongoose!");
+      } else {
+        res.send(err);
+      }
+    });
   });
-
-
 
 //Set up the server to listen to port 3000
 app.listen(3000, function() {
