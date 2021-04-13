@@ -1,6 +1,6 @@
 # Build Your Own RESTful API From Scratch
 
-## Boilerplate - Steps to Create a New Server That Uses MongoDB
+# Boilerplate - Steps to Create a New Server That Uses MongoDB
 
 ```javascript
 //jshint esversion:6
@@ -48,7 +48,9 @@ app.listen(3000, function() {
 });
 ```
 
-## RESTful
+* * *
+
+# RESTful
 
 | HTTP Verbs |           /articles          |          /articles/oasis          |
 | :--------: | :--------------------------: | :-------------------------------: |
@@ -58,9 +60,9 @@ app.listen(3000, function() {
 |    PATCH   |               -              |  Updates **the** article on Oasis |
 |   DELETE   | Deletes **all** the articles |  Deletes **the** article on Oasis |
 
-### Create the API Routes
+## Create the API Routes
 
-#### HTTP GET Request/GET Route
+### HTTP GET Request/GET Route
 
 ```javascript
 //Create the GET Route that fetches all the articles from the DB
@@ -69,18 +71,18 @@ app.get(route, function(req, res){
 });
 ```
 
-#### READ From mongoDB
+### READ From mongoDB
 
-```js
+```javascript
 //Query the DB and find all the "articles" inside the "Articles" collections
 <ModelName>.find({conditions}, function(err, results){
 	//Use the found results docs
 });
 ```
 
-#### GET Route Code Example
+### GET Route Code Example
 
-```js
+```javascript
 //Create the GET Route that fetches all the articles from the DB
 app.get("/articles", function(req, res) {
   //Query the DB and find all the articles inside the Articles collections
@@ -99,9 +101,9 @@ app.get("/articles", function(req, res) {
 });
 ```
 
-#### HTTP POST Request/POST Route
+### HTTP POST Request/POST Route
 
-```js
+```javascript
 //Create the POST Route that will create the new article
 //Use express to address POST requests on the server
 app.post(route, function(req, res){
@@ -109,11 +111,11 @@ app.post(route, function(req, res){
 });
 ```
 
-#### CREATE Data and Save Into mongoDB
+### CREATE Data and Save Into mongoDB
 
 Save the Data Created from the POST Request Into the mongoDB
 
-```js
+```javascript
 //Create a new constant that will store a new article
 const <constantName> = new <ModelName>({
 
@@ -126,9 +128,9 @@ const <constantName> = new <ModelName>({
 <constantName>.save();
 ```
 
-#### POST Route Code Example
+### POST Route Code Example
 
-```js
+```javascript
 //Create the POST Route that will create the new article
 //Use express to address POST requests on the server
 app.post("/articles", function(req, res) {
@@ -159,27 +161,27 @@ app.post("/articles", function(req, res) {
 });
 ```
 
-#### HTTP DELETE Request/DELETE Route
+### HTTP DELETE Request/DELETE Route
 
-```js
+```javascript
 //Create the DELETE Route that will delete all the articles inside articles collection using mongoose
 app.delete(route, function(req, res){
 
 });
 ```
 
-#### DELETE Data From mongoDB Using deleteMany
+### DELETE Data From mongoDB Using deleteMany
 
-```js
+```javascript
 Mongoose Delete
 <modelName>.deleteMany({conditions}, function(err){
 
 });
 ```
 
-#### DELETE Route Code Example
+### DELETE Route Code Example
 
-```js
+```javascript
 //Create the DELETE Route that will delete all the articles inside articles collection using mongoose
 app.delete("/articles", function(req, res) {
   //How the server will respond when the user makes the delete request to the /articles route
@@ -193,13 +195,13 @@ app.delete("/articles", function(req, res) {
 });
 ```
 
-#### [app.route()](https://expressjs.com/en/guide/routing.html)
+### [app.route()](https://expressjs.com/en/guide/routing.html)
 
 You can create chainable route handlers for a route path by using `app.route()`. Because the path is specified at a single location, creating modular routes is helpful, as is reducing redundancy and typos.
 
 Here is an example of chained route handlers that are defined by using `app.route()`.
 
-```js
+```javascript
 app.route('/book')
   .get(function (req, res) {
     res.send('Get a random book')
@@ -212,9 +214,9 @@ app.route('/book')
   })
 ```
 
-#### New Code Using Chained Route Handlers That Replaces the Previous Ones
+### New Code Using Chained Route Handlers That Replaces the Previous Ones
 
-```js
+```javascript
  //Chained Route Handlers Using Express - app.route() method
  app.route("/articles")
  //Create the GET Route that fetches all the articles from the DB
@@ -235,7 +237,7 @@ app.route('/book')
  })
 ```
 
-#### [Route Parameters](https://expressjs.com/en/guide/routing.html)
+### [Route Parameters](https://expressjs.com/en/guide/routing.html)
 
 Route parameters are named URL segments that are used to capture the values specified at their position in the URL. The captured values are populated in the `req.params` object, with the name of the route parameter specified in the path as their respective keys.
 
@@ -245,7 +247,7 @@ Route parameters are named URL segments that are used to capture the values spec
 
 To define routes with route parameters, simply specify the route parameters in the path of the route as shown below.
 
-```js
+```javascript
 app.get('/users/:userId/books/:bookId', function (req, res) {
   res.send(req.params)
 })
@@ -253,9 +255,9 @@ app.get('/users/:userId/books/:bookId', function (req, res) {
 
 > :warning: The name of route parameters must be made up of “word characters” ([A-Za-z0-9_]).
 
-#### HTTP GET a Specific Article Using Chained Route Handlers
+### HTTP GET a Specific Article Using Chained Route Handlers
 
-```js
+```javascript
 //Create the GET Route that fetches all a specific article from the DB
 app.route("route")
 
@@ -264,9 +266,9 @@ app.route("route")
 });
 ```
 
-#### READ from mongoDB
+### READ from mongoDB
 
-```js
+```javascript
 //Query the DB and find a specific article inside the "Articles" collections
 //findOne Method
 <ModelName>.findOne({conditions}, function(err, result){
@@ -274,9 +276,9 @@ app.route("route")
 });
 ```
 
-#### GET Route Code Example Using Chained Route Handlers
+### GET Route Code Example Using Chained Route Handlers
 
-```js
+```javascript
 app.route("/articles/:articleTitle")
 
   //Express Parameters -
@@ -303,7 +305,7 @@ app.route("/articles/:articleTitle")
   });
 ```
 
-#### HTTP PUT Request/PUT Route
+### HTTP PUT Request/PUT Route
 
 ```javascript
 //Create the PUT Route that updates the properties of an entire article
@@ -312,7 +314,7 @@ app.put(route, function(req, res){
 });
 ```
 
-#### UPDATE mongoDB
+### UPDATE mongoDB
 
 ```javascript
 //Work with mongoDB to replace a specific document with whatever is sent over by the client
@@ -321,7 +323,7 @@ app.put(route, function(req, res){
 });
 ```
 
-#### PUT Route Code Example Using Chained Route Handlers
+### PUT Route Code Example Using Chained Route Handlers
 
 ```javascript
   //Create the PUT request that uses mongoose's UPDATE method
@@ -348,7 +350,7 @@ app.put(route, function(req, res){
   });
 ```
 
-#### HTTP PATCH Request/PATCH Route
+### HTTP PATCH Request/PATCH Route
 
 ```javascript
 //Create the PATCH Route that updates the specific field of an article
@@ -357,7 +359,7 @@ app.patch(route, function(req, res){
 });
 ```
 
-#### UPDATE mongoDB
+### UPDATE mongoDB
 
 ```javascript
 //Work with mongoDB to replace a specific field with whatever is sent over by the client
@@ -366,7 +368,7 @@ app.patch(route, function(req, res){
 });
 ```
 
-#### PATCH Route Code Example Using Chained Route Handlers
+### PATCH Route Code Example Using Chained Route Handlers
 
 ```javascript
   /*
@@ -397,7 +399,7 @@ app.patch(route, function(req, res){
   });
 ```
 
-#### HTTP DELETE Request/DELETE Route
+### HTTP DELETE Request/DELETE Route
 
 ```javascript
 //Create the DELETE request that will delete an entry from mongoDB (title and content)
@@ -406,7 +408,7 @@ app.delete(route, function(req, res){
 });
 ```
 
-#### DELETE mongoDB
+### DELETE mongoDB
 
 ```javascript
 //Create the DELETE request that will delete an entry from mongoDB (title and content)
@@ -415,7 +417,7 @@ app.delete(route, function(req, res){
 });
 ```
 
-#### DELETE Route Code Example Using Chained Route Handlers
+### DELETE Route Code Example Using Chained Route Handlers
 
 ```javascript
   //Create the DELETE request that will delete an entry from mongoDB (title and content)
@@ -434,6 +436,8 @@ app.delete(route, function(req, res){
 
 * * *
 
+## Using Postman
+
 **_Using Postman to Handle the POST Request_**</br>
 1 - Open a new tab inside Postman</br>
 2- Choose **POST** from the dropdown menu</br>
@@ -447,7 +451,9 @@ app.delete(route, function(req, res){
 5 - Jump back to the **Hyper** terminal and see the data being printed</br>
 6 - Jump back **Robo 3T** and select `wikiDB/Collections/**articles**` then **CLICK** over it and select `View Documents`</br>
 
-#### Example of a HTML Form POST Request
+* * *
+
+## Example of a HTML Form POST Request
 
 ```html
 <form method="post" action="/">
@@ -457,13 +463,17 @@ app.delete(route, function(req, res){
 </form>
 ```
 
-## Running the Server and MongoDB in the Hyper Terminal
+* * *
+
+## mongo Guide
+
+### Running the Server and MongoDB in the Hyper Terminal
 
 1 - Open the project location inside Hyper and type in `mongod` and press `Enter`</br>
 2 - In a new tab inside Hyper type `mongo` and press `Enter`</br>
 3 - In a new tab inside Hyper type `nodemon app.js` and press `Enter`</br>
 
-## mongo Shell Quick [Reference](https://docs.mongodb.com/manual/reference/mongo-shell/)
+### mongo Shell Quick [Reference](https://docs.mongodb.com/manual/reference/mongo-shell/)
 
 |  Option | Description                                                                                                                     |
 | :-----: | :------------------------------------------------------------------------------------------------------------------------------ |
@@ -471,7 +481,7 @@ app.delete(route, function(req, res){
 |  --nodb | Start mongo shell without connecting to a database.                                                                             |
 | --shell | Used in conjunction with a JavaScript file (i.e. `<file.js>`) to continue in the mongo shell after running the JavaScript file. |
 
-## mongo Command Helpers
+### mongo Command Helpers
 
 |  Help Methods and Commands  | Descritpion                                                                                                                                                                                                       |
 | :-------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

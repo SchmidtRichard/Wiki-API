@@ -231,7 +231,7 @@ app.route("/articles/:articleTitle")
       title: req.params.articleTitle
     }, function(err) {
       if (!err) {
-        res.send("Successfully deleted the corresponding article using the deleteOne method from mongoose!");
+        res.send("Successfully deleted the corresponding article using the mongoose method's deleteOne!");
       } else {
         res.send(err);
       }
