@@ -237,7 +237,7 @@ app.route('/book')
 
 #### [Route Parameters](https://expressjs.com/en/guide/routing.html)
 
-Route parameters are named URL segments that are used to capture the values specified at their position in the URL. The captured values are populated in the req.params object, with the name of the route parameter specified in the path as their respective keys.
+Route parameters are named URL segments that are used to capture the values specified at their position in the URL. The captured values are populated in the `req.params` object, with the name of the route parameter specified in the path as their respective keys.
 
     Route path: /users/:userId/books/:bookId
     Request URL: http://localhost:3000/users/34/books/8989
@@ -302,6 +302,53 @@ app.route("/articles/:articleTitle")
     });
   });
 ```
+
+#### HTTP PUT Request/PUT Route
+
+```javascript
+//Create the PUT Route that updates the properties of an entire article
+app.put(route, function(req, res){
+
+});
+```
+
+#### UPDATE mongoDB
+
+```javascript
+//Work with mongoDB to replace a specific document with whatever is sent over by the client
+<ModelName>update({conditions}, {updates}, {overwrite: true} function(err, results){
+
+});
+```
+
+#### PUT Route Code Example Using Chained Route Handlers
+
+```javascript
+  //Create the PUT request that uses mongoose's UPDATE method
+  .put(function(req, res) {
+    //Work with mongoDB to replace a specific document with whatever is sent over by the client
+    Article.update({
+      /*
+      Search through the Articles collection with the title
+      that is requested by the client inside the URL parameter
+      */
+      title: req.params.articleTitle
+    }, {
+      //The update we want to make, we just like the POST request
+      title: req.body.title,
+      content: req.body.content
+    }, {
+      //mongoose needs the below to overwrite
+      overwrite: true
+    }, function(err) {
+      if (!err) {
+        res.send("Successfully updated article using PUT Request!");
+      }
+    });
+  });
+```
+
+* * *
 
 **_Using Postman to Handle the POST Request_**</br>
 1 - Open a new tab inside Postman</br>

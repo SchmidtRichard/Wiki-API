@@ -173,7 +173,38 @@ app.route("/articles/:articleTitle")
         res.send("No articles matching the title provided! Please try again!");
       }
     });
+  })
+
+  //Create the PUT request that uses mongoose's UPDATE method
+  .put(function(req, res) {
+    //Work with mongoDB to replace a specific document with whatever is sent over by the client
+    Article.update({
+      /*
+      Search through the Articles collection with the title
+      that is requested by the client inside the URL parameter
+      */
+      title: req.params.articleTitle
+    }, {
+      //The update we want to make, we just like the POST request
+      title: req.body.title,
+      content: req.body.content
+    }, {
+      //mongoose needs the below to overwrite
+      overwrite: true
+    }, function(err) {
+      if (!err) {
+        res.send("Successfully updated article using PUT Request!");
+      }
+    });
   });
+
+
+
+
+
+
+
+
 
 //Set up the server to listen to port 3000
 app.listen(3000, function() {
