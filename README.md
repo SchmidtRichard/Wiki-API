@@ -1,6 +1,6 @@
 # Build Your Own RESTful API From Scratch
 
-# Boilerplate - Steps to Create a New Server That Uses MongoDB
+# Boilerplate - Create a New Server That Uses MongoDB
 
 ```javascript
 //jshint esversion:6
@@ -195,7 +195,7 @@ app.delete("/articles", function(req, res) {
 });
 ```
 
-### [app.route()](https://expressjs.com/en/guide/routing.html)
+## [app.route()](https://expressjs.com/en/guide/routing.html)
 
 You can create chainable route handlers for a route path by using `app.route()`. Because the path is specified at a single location, creating modular routes is helpful, as is reducing redundancy and typos.
 
@@ -239,7 +239,10 @@ app.route('/book')
    //Create the POST Route that will create the new article
    //Use express to address POST requests on the server
    .post(function(req, res) {
-     //Once the POST request come through from the client we need to tap into the req.body in order to grab the data that was sent through
+     /*
+     Once the POST request come through from the client we need to tap
+     into the req.body in order to grab the data that was sent through
+     */
      console.log(req.body.title);
      console.log(req.body.content);
 
@@ -262,7 +265,10 @@ app.route('/book')
      });
    })
 
-   //Create the DELETE Route that will delete all the articles inside articles collection using mongoose
+   /*
+   Create the DELETE Route that will delete all the articles
+   inside articles collection using mongoose
+   */
    .delete(function(req, res) {
      //How the server will respond when the user makes the delete request to the /articles route
      Article.deleteMany(function(err) {
@@ -275,7 +281,7 @@ app.route('/book')
    });
 ```
 
-### [Route Parameters](https://expressjs.com/en/guide/routing.html)
+## [Route Parameters](https://expressjs.com/en/guide/routing.html)
 
 Route parameters are named URL segments that are used to capture the values specified at their position in the URL. The captured values are populated in the `req.params` object, with the name of the route parameter specified in the path as their respective keys.
 
